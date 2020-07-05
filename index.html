@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Primary Meta Tags -->
+        <title>capes.dev - Minecraft Capes API, History & CDN</title>
+        <meta name="title" content="capes.dev - Minecraft Capes API, History & CDN">
+        <meta name="description" content="Minecraft Capes API, History & CDN">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://capes.dev/">
+        <meta property="og:title" content="capes.dev - Minecraft Capes API, History & CDN">
+        <meta property="og:description" content="Minecraft Capes API, History & CDN">
+        <meta property="og:image" content="https://res.cloudinary.com/inventivetalent/image/upload/brand/capes/capes.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://capes.dev/">
+        <meta property="twitter:title" content="capes.dev - Minecraft Capes API, History & CDN">
+        <meta property="twitter:description" content="Minecraft Capes API, History & CDN">
+        <meta property="twitter:image" content="https://res.cloudinary.com/inventivetalent/image/upload/brand/capes/capes.png">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <style>
+            .material-icons {
+                vertical-align: bottom;
+            }
+
+            .row{
+                margin-bottom: 5px !important;
+            }
+
+            #capes-container .cape {
+                display: inline-block;
+            }
+
+            #capes-container .cape .cape-type {
+                display: block;
+                opacity: 0.8;
+            }
+
+            #capes-container .cape > img {
+                width: 100%;
+                box-shadow: black 2px 2px 10px;
+            }
+        </style>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+    <body>
+        <div class="container">
+            <br/>
+            <br/>
+            <h1 class="header center">capes.dev</h1>
+            <h4 class="header center">Minecraft Capes API, History & CDN</h4>
+            <br/>
+            <div class="row center">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <form class="col s12 m6 offset-m3" id="cape-search-form">
+                                    <div class="row">
+                                        <div class="input-field col s10">
+                                            <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate" minlength="2" maxlength="36">
+                                            <label for="player-input">Username/UUID</label>
+                                            <span class="helper-text" data-error="Invalid Username/UUID"></span>
+                                        </div>
+                                        <div class="input-field col s2">
+                                            <button class="btn waves-effect waves-light" type="submit"><i class="material-icons">search</i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row" id="messages-container">
+                                <div class="col s6 offset-s3">
+                                    <div class="message" id="message-loading" style="display: none;">
+                                        <h5><i class="material-icons">loop</i> Loading Capes...</h5>
+                                    </div>
+                                    <div class="message" id="message-not-found" style="display: none;">
+                                        <h5><i class="material-icons">warning</i> Player Not Found!</h5>
+                                    </div>
+                                    <div class="message" id="message-no-capes" style="display: none;">
+                                        <h5><i class="material-icons">info</i> Player has no Capes</h5>
+                                    </div>
+                                    <div class="message" id="message-error" style="display: none;">
+                                        <h5><i class="material-icons">error</i> Something went wrong!</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="api-load-info" style="display:none;">
+                                <code><pre>https://api.capes.dev/load/<span class="username"></span>(/&lt;type&gt;)</pre></code>
+                            </div>
+                            <div class="row" id="capes-container">
+                                <!-- Generated capes when searching -->
+                            </div>
+                            <br/>
+                            <div class="divider"></div>
+                            <div class="row left-align">
+                                <div class="col s12">
+                                    <br/>
+                                    <span>Maintained by <a href="https://inventivetalent.dev?utm_source=capes" target="_blank">inventivetalent</a> &nbsp;|&nbsp; GitHub: <a href="https://github.com/InventivetalentDev/api.capes.dev" target="_blank">API</a> / <a href="https://github.com/InventivetalentDev/capes.dev" target="_blank">This</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            $("#cape-search-form").on("submit", e => {
+                e.preventDefault();
+
+                let player = $("#player-input").val();
+                if (player.length < 2 || player.length > 36) return;
+
+                $("#capes-container").empty();
+                $(".message").hide();
+
+                $("#message-loading").show();
+
+                loadCapes(player);
+            });
+
+            $(document).ready(()=>{
+                if (location.hash.length > 3) {
+                    let player = location.hash.substr(1);
+                    $("#player-input").val(player);
+                    loadCapes(player);
+                }
+            })
+
+            function loadCapes(player) {
+                $(".username").text(player);
+                $("#api-load-info").hide();
+                $.ajax("https://api.capes.dev/load/" + player.trim())
+                    .done(data => {
+                        console.log(data);
+                        $(".message").hide();
+
+                        location.hash = player;
+
+                        let container = $("#capes-container");
+                        let count =0;
+                        for (let key in data) {
+                            let cape = data[key];
+                            if(cape.exists) {
+                                count++;
+                                container.append('<div class="col s2 cape">' +
+                                    '  <img src="' + cape.frontImageUrl + '" alt="' + cape.playerName + '\'s ' + cape.type + ' cape" style="'+(cape.height<100?"image-rendering: pixelated;":"")+'">' +
+                                    '  <span class="cape-type">' + cape.type + '</span>' +
+                                    '</div>');
+
+                                location.hash = cape.playerName;
+                            }
+                        }
+                        if (count <= 0) {
+                            $("#message-no-capes").show();
+                        }else{
+                            $("#api-load-info").show();
+                        }
+                    })
+                    .fail(err => {
+                        console.warn(err);
+                        $(".message").hide();
+                        if (err.status === 404) {
+                            $("#message-not-found").show();
+                        } else {
+                            $("#message-error").show();
+                        }
+                    })
+            }
+        </script>
+    </body>
+</html>
