@@ -34,6 +34,10 @@
 
             #capes-container .cape {
                 display: inline-block;
+                float: none !important;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 8px;
             }
 
             #capes-container .cape .cape-type {
@@ -154,7 +158,7 @@
                             if (cape.exists) {
                                 count++;
                                 let alt = cape.playerName + '\'s ' + cape.type + ' cape';
-                                container.append('<div class="col s2 cape">' +
+                                container.append('<div class="col s6 m3 l2 cape">' +
                                     '  <img src="' + cape.frontImageUrl + '" alt="' + alt + '" title="' + alt + '" style="' + (cape.height < 100 ? "image-rendering: pixelated;" : "") + '">' +
                                     '  <span class="cape-type">' + cape.type + '</span>' +
                                     '</div>');
