@@ -28,7 +28,7 @@
                 vertical-align: bottom;
             }
 
-            .row{
+            .row {
                 margin-bottom: 5px !important;
             }
 
@@ -91,7 +91,9 @@
                                 </div>
                             </div>
                             <div class="row" id="api-load-info" style="display:none;">
-                                <code><pre>https://api.capes.dev/load/<span class="username"></span>(/&lt;type&gt;)</pre></code>
+                                <code>
+                                    <pre>https://api.capes.dev/load/<span class="username"></span>(/&lt;type&gt;)</pre>
+                                </code>
                             </div>
                             <div class="row" id="capes-container">
                                 <!-- Generated capes when searching -->
@@ -127,7 +129,7 @@
                 loadCapes(player);
             });
 
-            $(document).ready(()=>{
+            $(document).ready(() => {
                 if (location.hash.length > 3) {
                     let player = location.hash.substr(1);
                     $("#player-input").val(player);
@@ -146,13 +148,14 @@
                         location.hash = player;
 
                         let container = $("#capes-container");
-                        let count =0;
+                        let count = 0;
                         for (let key in data) {
                             let cape = data[key];
-                            if(cape.exists) {
+                            if (cape.exists) {
                                 count++;
+                                let alt = cape.playerName + '\'s ' + cape.type + ' cape';
                                 container.append('<div class="col s2 cape">' +
-                                    '  <img src="' + cape.frontImageUrl + '" alt="' + cape.playerName + '\'s ' + cape.type + ' cape" style="'+(cape.height<100?"image-rendering: pixelated;":"")+'">' +
+                                    '  <img src="' + cape.frontImageUrl + '" alt="' + alt + '" title="' + alt + '" style="' + (cape.height < 100 ? "image-rendering: pixelated;" : "") + '">' +
                                     '  <span class="cape-type">' + cape.type + '</span>' +
                                     '</div>');
 
@@ -161,7 +164,7 @@
                         }
                         if (count <= 0) {
                             $("#message-no-capes").show();
-                        }else{
+                        } else {
                             $("#api-load-info").show();
                         }
                     })
