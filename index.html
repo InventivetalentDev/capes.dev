@@ -108,6 +108,7 @@
                                 <div class="col s12">
                                     <br/>
                                     <span>Maintained by <a href="https://inventivetalent.dev?utm_source=capes" target="_blank">inventivetalent</a> &nbsp;|&nbsp; GitHub: <a href="https://github.com/InventivetalentDev/api.capes.dev" target="_blank">API</a> / <a href="https://github.com/InventivetalentDev/capes.dev" target="_blank">This</a></span>
+                                    <span style="float: right;">Storing <span id="cape-count">000</span> capes for <span id="player-count">000</span> players</span>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +142,12 @@
                 }
 
                 $("#player-input").focus();
+
+                $.ajax("https://api.capes.dev/stats")
+                    .done(data => {
+                        $("#cape-count").text("" + data.total);
+                        $("#player-count").text("" + data.players);
+                    });
             })
 
             function loadCapes(player) {
