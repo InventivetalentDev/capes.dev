@@ -68,7 +68,7 @@
                                 <form class="col s12 m6 offset-m3" id="cape-search-form">
                                     <div class="row">
                                         <div class="input-field col s10">
-                                            <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate" minlength="2" maxlength="36">
+                                            <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate" minlength="2" maxlength="36" autofocus>
                                             <label for="player-input">Username/UUID</label>
                                             <span class="helper-text" data-error="Invalid Username/UUID"></span>
                                         </div>
@@ -139,6 +139,8 @@
                     $("#player-input").val(player);
                     loadCapes(player);
                 }
+
+                $("#player-input").focus();
             })
 
             function loadCapes(player) {
