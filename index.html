@@ -68,7 +68,7 @@
                                 <form class="col s12 m6 offset-m3" id="cape-search-form">
                                     <div class="row">
                                         <div class="input-field col s10">
-                                            <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate grey-text text-lighten-2" minlength="2" maxlength="36" autofocus>
+                                            <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate grey-text text-lighten-2" minlength="1" maxlength="36" autofocus>
                                             <label for="player-input">Username/UUID</label>
                                             <span class="helper-text" data-error="Invalid Username/UUID"></span>
                                         </div>
@@ -124,7 +124,7 @@
                 e.preventDefault();
 
                 let player = $("#player-input").val();
-                if (player.length < 2 || player.length > 36) return;
+                if (player.length < 1 || player.length > 36) return;
 
                 $("#capes-container").empty();
                 $(".message").hide();
