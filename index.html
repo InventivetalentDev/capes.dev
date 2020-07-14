@@ -168,7 +168,7 @@
                                 count++;
                                 let alt = cape.playerName + '\'s ' + cape.type + ' cape';
                                 container.append('<div class="col s6 m3 l2 cape">' +
-                                    '  <img src="' + cape.frontImageUrl + '" alt="' + alt + '" title="' + alt + '" style="' + (cape.height < 100 ? "image-rendering: pixelated;" : "") + '">' +
+                                    '  <img src="' + (cape.animated? cape.imageUrls.animated.front : cape.imageUrls.still.front) + '" alt="' + alt + '" title="' + alt + '" style="' + (cape.height < 100 ? "image-rendering: pixelated;" : "") + '">' +
                                     '  <span class="cape-type">' + cape.type + '</span>' +
                                     '</div>');
 
