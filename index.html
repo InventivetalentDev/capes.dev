@@ -95,6 +95,7 @@
                                 </div>
                             </div>
                             <div class="row" id="api-load-info" style="display:none;">
+                                <img id="player-avatar" src="https://crafatar.com/avatars/bcd2033c63ec4bf88aca680b22461340?size=64" style="display: none;">
                                 <code>
                                     <pre>https://api.capes.dev/load/<span class="username"></span>(/&lt;type&gt;)</pre>
                                 </code>
@@ -153,6 +154,7 @@
             function loadCapes(player) {
                 $(".username").text(player);
                 $("#api-load-info").hide();
+                $("#player-avatar").hide();
                 $.ajax("https://api.capes.dev/load/" + player.trim())
                     .done(data => {
                         console.log(data);
@@ -174,6 +176,7 @@
 
                                 location.hash = cape.playerName;
                             }
+                            $("#player-avatar").attr("src", "https://crafatar.com/avatars/" + cape.player + "?size=64").show();
                         }
                         if (count <= 0) {
                             $("#message-no-capes").show();
