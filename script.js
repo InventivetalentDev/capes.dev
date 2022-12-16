@@ -70,6 +70,8 @@ function loadCapes(player) {
                         '</div>');
 
                     history.pushState({player}, '', '/' + player);
+
+                    $('#description').attr('description', player + "'s Minecraft cape | Minecraft Capes API, History & CDN");
                 }
                 $("#player-avatar").attr("src", "https://crafatar.com/avatars/" + cape.player + "?size=64").show();
             }
