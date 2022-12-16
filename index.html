@@ -53,6 +53,10 @@
             #player-avatar {
                 box-shadow: black 1px 1px 5px;
             }
+
+            #cape-load-link {
+                font-size: min(3vw, 1rem);
+            }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -71,12 +75,12 @@
                             <div class="row">
                                 <form class="col s12 m6 offset-m3" id="cape-search-form">
                                     <div class="row">
-                                        <div class="input-field col s10">
+                                        <div class="input-field col m10 s9">
                                             <input placeholder="Username/UUID" id="player-input" name="player" type="text" class="validate grey-text text-lighten-2" minlength="1" maxlength="36" autofocus>
                                             <label for="player-input">Username/UUID</label>
                                             <span class="helper-text" data-error="Invalid Username/UUID"></span>
                                         </div>
-                                        <div class="input-field col s2">
+                                        <div class="input-field col m2 s3">
                                             <button class="btn waves-effect waves-light teal darken-3" type="submit"><i class="material-icons">search</i></button>
                                         </div>
                                     </div>
