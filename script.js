@@ -26,9 +26,9 @@ $(document).ready(() => {
 
     let player;
     if (url.hash.length > 3) {
-        player = location.hash.substr(1);
+        player = url.hash.substr(1);
     } else if (url.pathname.length > 3) {
-        player = location.pathname.substr(1);
+        player = url.pathname.substr(1);
     } else if (url.searchParams.has("query")) {
         player = url.searchParams.get("query");
     }
