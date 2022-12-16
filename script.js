@@ -69,7 +69,7 @@ function loadCapes(player) {
                         '  <span class="cape-type">' + link + '</span>' +
                         '</div>');
 
-                    history.pushState('', '', '/' + player);
+                    history.pushState({player}, '', '/' + player);
                 }
                 $("#player-avatar").attr("src", "https://crafatar.com/avatars/" + cape.player + "?size=64").show();
             }
