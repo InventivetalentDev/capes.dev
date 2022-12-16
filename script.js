@@ -32,8 +32,10 @@ $(document).ready(() => {
     } else if (url.searchParams.has("query")) {
         player = url.searchParams.get("query");
     }
-    $("#player-input").val(player);
-    loadCapes(player);
+    if (player) {
+        $("#player-input").val(player);
+        loadCapes(player);
+    }
 
     $("#player-input").focus();
 
