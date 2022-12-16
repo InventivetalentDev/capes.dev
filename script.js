@@ -24,15 +24,16 @@ $("#cape-search-form").on("submit", e => {
 $(document).ready(() => {
     let url = new URL(location);
 
+    let player;
     if (url.hash.length > 3) {
-        let player = location.hash.substr(1);
-        $("#player-input").val(player);
-        loadCapes(player);
+        player = location.hash.substr(1);
+    } else if (url.pathname.length > 3) {
+        player = location.pathname.substr(1);
     } else if (url.searchParams.has("query")) {
-        let player = url.searchParams.get("query");
-        $("#player-input").val(player);
-        loadCapes(player);
+        player = url.searchParams.get("query");
     }
+    $("#player-input").val(player);
+    loadCapes(player);
 
     $("#player-input").focus();
 
