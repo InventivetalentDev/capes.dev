@@ -56,9 +56,6 @@ function loadCapes(player) {
             console.log(data);
             $(".message").hide();
 
-            // location.hash = player;
-            history.pushState('', '', '/' + player);
-
             let container = $("#capes-container");
             let count = 0;
             for (let key in data) {
@@ -72,7 +69,7 @@ function loadCapes(player) {
                         '  <span class="cape-type">' + link + '</span>' +
                         '</div>');
 
-                    location.hash = cape.playerName;
+                    history.pushState('', '', '/' + player);
                 }
                 $("#player-avatar").attr("src", "https://crafatar.com/avatars/" + cape.player + "?size=64").show();
             }
