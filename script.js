@@ -7,6 +7,8 @@ const TYPE_LINKS = {
     "tlauncher": "https://tlauncher.org/"
 }
 
+const NUMBER_FORMAT = new Intl.NumberFormat();
+
 $("#cape-search-form").on("submit", e => {
     e.preventDefault();
 
@@ -41,8 +43,8 @@ $(document).ready(() => {
 
     $.ajax("https://api.capes.dev/stats")
         .done(data => {
-            $("#cape-count").text("" + data.total);
-            $("#player-count").text("" + data.players);
+            $("#cape-count").text(NUMBER_FORMAT.format(data.total));
+            $("#player-count").text(NUMBER_FORMAT.format(data.players));
         });
 })
 
