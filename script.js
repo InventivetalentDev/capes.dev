@@ -56,7 +56,8 @@ function loadCapes(player) {
             console.log(data);
             $(".message").hide();
 
-            location.hash = player;
+            // location.hash = player;
+            history.pushState('', '', '/' + player);
 
             let container = $("#capes-container");
             let count = 0;
