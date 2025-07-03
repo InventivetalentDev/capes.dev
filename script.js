@@ -76,7 +76,8 @@ function loadCapes(player) {
 
                     history.pushState({ player }, '', '/' + player);
 
-                    $('#description').attr('content', player + "'s Minecraft cape | Minecraft Capes API, History & CDN");
+                    $('#title').attr('content', player + "'s Minecraft capes - capes.dev - Minecraft Capes API, History & CDN")
+                    $('#description').attr('content', player + "'s Minecraft capes | Minecraft Capes API, History & CDN");
                 }
                 $("#player-avatar").attr("src", "https://crafatar.com/avatars/" + cape.player + "?size=64").show();
             }
