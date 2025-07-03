@@ -20,6 +20,7 @@ $("#cape-search-form").on("submit", e => {
 
     $("#message-loading").show();
 
+     $.ajax("https://capes.dev/?q=" + encodeURIComponent(player.trim()));
     loadCapes(player);
 });
 
@@ -33,6 +34,8 @@ $(document).ready(() => {
         player = url.pathname.substr(1);
     } else if (url.searchParams.has("query")) {
         player = url.searchParams.get("query");
+    } else if (url.searchParams.has("q")) {
+        player = url.searchParams.get("q");
     }
     if (player) {
         $("#player-input").val(player);
@@ -71,7 +74,7 @@ function loadCapes(player) {
                         '  <span class="cape-type">' + link + '</span>' +
                         '</div>');
 
-                    history.pushState({player}, '', '/' + player);
+                    history.pushState({ player }, '', '/' + player);
 
                     $('#description').attr('content', player + "'s Minecraft cape | Minecraft Capes API, History & CDN");
                 }
