@@ -20,7 +20,7 @@ $("#cape-search-form").on("submit", e => {
 
     $("#message-loading").show();
 
-     $.ajax("https://capes.dev/?q=" + encodeURIComponent(player.trim()));
+    $.ajax("https://capes.dev/" + encodeURIComponent(player.trim()) + "?q=" + encodeURIComponent(player.trim()));
     loadCapes(player);
 });
 
