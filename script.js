@@ -4,7 +4,8 @@ const TYPE_LINKS = {
     "minecraftcapes": "https://minecraftcapes.net",
     "labymod": "https://www.labymod.net",
     "5zig": "https://5zigreborn.eu/",
-    "tlauncher": "https://tlauncher.org/"
+    "tlauncher": "https://tlauncher.org/",
+    "skinmc": "https://skinmc.net/"
 }
 
 const NUMBER_FORMAT = new Intl.NumberFormat();
